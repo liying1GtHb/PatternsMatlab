@@ -29,11 +29,11 @@ hold on;
 % plot the initial medium circle;
 s = 0:2*pi/50:2*pi;
 xmedium = R-rm+rm*cos(s);
-ymedium = R-rm+rm*sin(s);
+ymedium = rm*sin(s);
 hmedium = plot(xmedium,ymedium,'r');
 % plot the initial small circle;
 xsmall = R-rs+rs*cos(s);
-ysmall = R-rs+rs*sin(s);
+ysmall = rs*sin(s);
 hsmall = plot(xsmall,ysmall,'g');
 p = plot(R-rs+pos,0,'o','MarkerFaceColor','red');
 % tm is the parameter angle formed by the radius of the big circle through 

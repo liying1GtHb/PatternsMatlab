@@ -24,7 +24,7 @@ hold on;
 % plot the initial small circle;
 s = 0:2*pi/50:2*pi;
 xsmall = R-r+r*cos(s);
-ysmall = R-r+r*sin(s);
+ysmall = r*sin(s);
 hsmall = plot(xsmall,ysmall,'r');
 p = plot(R-r+pos,0,'.','MarkerFaceColor','red');
 % t is the parameter angle formed by the radius of the big circle through 
