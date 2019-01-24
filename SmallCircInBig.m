@@ -1,8 +1,8 @@
 function SmallCircInBig(R,r,pos,rot)
 % Draw a big circle centered at the origin and a smaller inner circle 
 % touching it at (R,0). The smaller circle rolls clockwise along the big
-% circle's circumference. The program traces the movement of the point Ps
-% initially located at P=(R,0) on the small circle; 
+% circle's circumference. The program traces the movement of the point pos
+% initially located at P=(R-r+pos,0) in the small circle; 
 % Input parameter:
 % R: radius of the big circle;
 % r: radius of the small circle;
