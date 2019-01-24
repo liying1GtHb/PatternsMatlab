@@ -22,7 +22,7 @@ fimplicit(@(x,y) x.^2 + y.^2 - R^2);
 axis equal;
 hold on;
 % plot the initial small circle;
-s = 0:0.1:2*pi;
+s = 0:2*pi/50:2*pi;
 xsmall = R-r+r*cos(s);
 ysmall = R-r+r*sin(s);
 hsmall = plot(xsmall,ysmall,'r');
@@ -32,7 +32,7 @@ p = plot(R-r+pos,0,'.','MarkerFaceColor','red');
 % through the point Ps;
 % alpha is the angle formed by the radius of the big circle through the 
 % center of the smaller circle and the positive x-axis;
-t = 0:0.2:rot*2*pi;
+t = 0:2*pi/50:rot*2*pi;
 alpha = r*t/R;
 for ii =1:length(t)
     % pause(0.01);
