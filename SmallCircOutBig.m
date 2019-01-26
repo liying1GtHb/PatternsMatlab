@@ -1,14 +1,14 @@
 function SmallCircOutBig(R,r,pos,rot)
-% Draw a big circle centered at the origin and a smaller outer circle 
-% touching it at (R,0). The smaller circle rolls counterclockwise along the 
-% big circle's circumference. The program traces the movement of the point 
-% pos initially located at P=(R+r-pos,0) in the small circle; 
+% Draw a fixed circle centered at the origin and another circle touching it
+% externally at (R,0). The second circle rolls counterclockwise along the 
+% first circle's circumference. The program traces the movement of the point 
+% pos initially located at P=(R+r-pos,0) in the second circle; 
 % Input parameter:
-% R: radius of the big circle;
-% r: radius of the small circle;
+% R: radius of the first circle;
+% r: radius of the second circle;
 % pos: the point to trace; indicated by the distance from the center of the 
-% small circle; 0<pos<r;
-% rot: number of rotations the small circle rolls around;
+% second circle; 0<pos<r;
+% rot: number of rotations the second circle rolls around;
 
 
 % figure('visible','on'); This command is needed if the commands are
@@ -16,23 +16,23 @@ function SmallCircOutBig(R,r,pos,rot)
 if pos > r
     error('The trace point must be inside the small circle! (pos <= r)');
 end
-% plot the big circle;
+% plot the first circle;
 fimplicit(@(x,y) x.^2 + y.^2 - R^2);
 axis equal;
 axis([-R-2.1*r R+2.1*r -R-2.1*r R+2.1*r]);
 hold on;
 axis manual;
-% plot the initial small circle;
+% plot the initial second circle;
 s = 0:2*pi/50:2*pi;
 xsmall = R+r+r*cos(s);
 ysmall = r*sin(s);
 hsmall = plot(xsmall,ysmall,'r');
 p = plot(R+r-pos,0,'.','MarkerFaceColor','red');
-% t is the parameter angle formed by the radius of the big circle through 
-% the center of the smaller circle and the radius of the smaller circle 
+% t is the parameter angle formed by the radius of the first circle through 
+% the center of the second circle and the radius of the second circle 
 % through the point Ps;
-% alpha is the angle formed by the radius of the big circle through the 
-% center of the smaller circle and the positive x-axis;
+% alpha is the angle formed by the radius of the first circle through the 
+% center of the second circle and the positive x-axis;
 t = 0:2*pi/50:rot*2*pi;
 alpha = r*t/R;
 for ii =1:length(t)
