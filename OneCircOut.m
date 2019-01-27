@@ -1,14 +1,14 @@
 function OneCircOut(R,r,pos,rot)
-% Draw a fixed circle centered at the origin and another circle touching it
-% externally at (R,0). The second circle rolls counterclockwise along the 
-% first circle's circumference. The program traces the movement of the point 
-% pos initially located at P=(R+r-pos,0) in the second circle; 
+% Draw a fixed circle C0 centered at the origin and another circle C1 
+% touching it externally at (R,0). C1 rolls counterclockwise along C0's 
+% circumference. The program traces the movement of the point 
+% pos initially located at P=(R+r-pos,0) in C1; 
 % Input parameter:
-% R: radius of the first circle;
-% r: radius of the second circle;
-% pos: the point to trace; indicated by the distance from the center of the 
-% second circle; 0<pos<r;
-% rot: number of rotations the second circle rolls around;
+% R: radius of C0;
+% r: radius of C1;
+% pos: the point to trace; indicated by the distance from the center of C1; 
+% 0<pos<r;
+% rot: number of rotations C1 rolls around;
 
 
 % figure('visible','on'); This command is needed if the commands are
@@ -16,10 +16,11 @@ function OneCircOut(R,r,pos,rot)
 if pos > r
     error('The trace point must be inside the last circle! (pos <= r)');
 end
-% plot the first circle;
+% plot C0;
+Rlim = R+2*r;
 fimplicit(@(x,y) x.^2 + y.^2 - R^2);
 axis equal;
-axis([-R-2.1*r R+2.1*r -R-2.1*r R+2.1*r]);
+axis([-Rlim Rlim -Rlim Rlim]);
 hold on;
 axis manual;
 % plot the initial second circle;
@@ -28,11 +29,10 @@ x1 = R+r+r*cos(s);
 y1 = r*sin(s);
 h1 = plot(x1,y1,'r');
 p = plot(R+r-pos,0,'.','MarkerFaceColor','red');
-% t is the parameter angle formed by the radius of the first circle through 
-% the center of the second circle and the radius of the second circle 
-% through the point Ps;
-% alpha is the angle formed by the radius of the first circle through the 
-% center of the second circle and the positive x-axis;
+% t is the parameter angle formed by the radius of C0 through the center 
+% of C1 and the radius of C1 through the point P1;
+% alpha is the angle formed by the radius of C0 through the 
+% center of C1 and the positive x-axis;
 t = 0:2*pi/50:rot*2*pi;
 alpha = r*t/R;
 for ii =1:length(t)
