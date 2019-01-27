@@ -14,7 +14,7 @@ function OneCircOut(R,r,pos,rot)
 % figure('visible','on'); This command is needed if the commands are
 % implemented in live script; 
 if pos > r
-    error('The trace point must be inside the small circle! (pos <= r)');
+    error('The trace point must be inside the last circle! (pos <= r)');
 end
 % plot the first circle;
 fimplicit(@(x,y) x.^2 + y.^2 - R^2);
