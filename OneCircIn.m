@@ -16,7 +16,7 @@ function OneCircIn(R,r,pos,rot)
 if pos > r
     error('The trace point must be inside the second circle! (pos <= r)');
 end
-Rlim = max(R,r);
+Rlim = 2*max(R,r)-R;
 % plot C0;
 fimplicit(@(x,y) x.^2 + y.^2 - R^2);
 axis equal;

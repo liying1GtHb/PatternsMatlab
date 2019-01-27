@@ -24,7 +24,7 @@ if pos > r2
     error('The trace point must be inside the last circle! (pos <= r2)');
 end
 % plot C0;
-Rlim = 2*max([R,r1,r2])-1;
+Rlim = 2*max([R,r1,r2])-R;
 fimplicit(@(x,y) x.^2 + y.^2 - R^2);
 axis equal;
 axis([-Rlim Rlim -Rlim Rlim]);
