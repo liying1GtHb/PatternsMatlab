@@ -35,7 +35,7 @@ axis manual;
 s = 0:2*pi/50:2*pi;
 h = gobjects(1,numCirc);
 for ii = 1:numCirc
-    x = (R+2*sum(r(1:ii))-r(ii))*cos(s);
+    x = (R+2*sum(r(1:ii))-r(ii))+r(ii)*cos(s);
     y = r(ii)*sin(s);
     h(ii) = plot(x,y,'r');
 end
