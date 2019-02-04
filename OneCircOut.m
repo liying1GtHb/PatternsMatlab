@@ -28,7 +28,7 @@ s = 0:2*pi/50:2*pi;
 x1 = R+r+r*cos(s);
 y1 = r*sin(s);
 h1 = plot(x1,y1,'r');
-p = plot(R+r-pos,0,'.','MarkerFaceColor','red');
+p = plot(R+r-pos,0,'o','MarkerFaceColor','red');
 % t is the parameter angle formed by the radius of C0 through the center 
 % of C1 and the radius of C1 through the point P1;
 % alpha is the angle formed by the radius of C0 through the 
@@ -36,7 +36,7 @@ p = plot(R+r-pos,0,'.','MarkerFaceColor','red');
 t = 0:2*pi/50:rot*2*pi;
 alpha = r*t/R;
 for ii =1:length(t)
-    % pause(0.01);
+    pause(0.1);
     x1mov = (R+r)*cos(alpha(ii))+r*cos(s);
     y1mov = (R+r)*sin(alpha(ii))+r*sin(s);
     h1.XData = x1mov;

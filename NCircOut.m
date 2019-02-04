@@ -39,7 +39,7 @@ for ii = 1:numCirc
     y = r(ii)*sin(s);
     h(ii) = plot(x,y,'r');
 end
-p = plot(R+2*sum(r)-r(numCirc)-pos,0,'.','MarkerFaceColor','red');
+p = plot(R+2*sum(r)-r(numCirc)-pos,0,'o','MarkerFaceColor','red');
 %
 % t(i) is the parameter angle formed by the radius of C(i-1) through the
 % center of Ci and the radius of Ci through the point Pi;
@@ -59,7 +59,7 @@ end
 lastxcenter = zeros(1,numSampt);
 lastycenter = zeros(1,numSampt);
 for ii = 1:numSampt
-    % pause(0.01);
+    pause(0.01);
     % draw C1 after rotation;
     xcenter = (R+r(1))*cos(alpha(1,ii));
     ycenter = (R+r(1))*sin(alpha(1,ii));
