@@ -36,16 +36,19 @@ if pos > r(numCirc)
 end
 fimplicit(@(x,y) x.^2 + y.^2 - 1);
 % compute the region that accommodate all circles; 
-Llim = 1;
 Rlim = 1;
-for ii = 1:numCirc
-    if InOutInd < 0
+if InOutInd(1) < 0
+    Rlim = Rlim+2*r(1);
+else
+    Rlim = max(Rlim-2+2*r(1),Rlim);
+end
+for ii = 2:numCirc
+    if InOutInd(ii) < 0
         Rlim = Rlim+2*r(ii);
     else
-        Llim = max(Llim,abs(Rlim-2*r(ii)));
+        Rlim = max(Rlim,Rlim-2*r(ii-1)+2*r(ii));
     end
 end
-Rlim = max(Llim,Rlim);
 axis equal;
 axis([-Rlim Rlim -Rlim Rlim]);
 hold on;
