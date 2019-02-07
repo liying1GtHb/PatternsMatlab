@@ -84,31 +84,34 @@ alpha(1,:)=r(1)*t(1,:)/1;
 for ii = 2:numCirc
     alpha(ii,:) = r(ii)*t(ii,:)/r(ii-1);
 end
-% record the centers of the last circle during rotations;
+t = diag(-InOutInd)*t; % +theta if external; -theta if internal;
+
+% record the trajectories of the last touching point during rotations;
+traceP = (-InOutInd(numCirc)+1)/2*pi+sum(alpha+t);
+% record the polar angle formed by the centers of the circles;
+allCenters = cumsum(alpha+t)-t;
+% record the trajectory of the last circle;
 lastxcenter = zeros(1,numSampt);
 lastycenter = zeros(1,numSampt);
-anglecum = zeros(1,numSampt);
 for ii = 1:numSampt
     pause(spd);
     % draw C1 after rotation;
-    xcenter = (1-InOutInd(1)*r(1))*cos(alpha(1,ii));
-    ycenter = (1-InOutInd(1)*r(1))*sin(alpha(1,ii));
+    xcenter = (1-InOutInd(1)*r(1))*cos(allCenters(1,ii));
+    ycenter = (1-InOutInd(1)*r(1))*sin(allCenters(1,ii));
     h(1).XData = xcenter+r(1)*cos(s);
     h(1).YData = ycenter+r(1)*sin(s);
     % draw the other circles after rotation;
-    anglecum(ii) = alpha(1,ii);
     for jj = 2:numCirc
-        anglecum(ii) = anglecum(ii)-InOutInd(jj)*t(jj-1,ii)+alpha(jj,ii);
-        xcenter = xcenter+(r(jj-1)-InOutInd(jj)*r(jj))*cos(anglecum(ii));
-        ycenter = ycenter+(r(jj-1)-InOutInd(jj)*r(jj))*sin(anglecum(ii));
+        xcenter = xcenter+(r(jj-1)-InOutInd(jj)*r(jj))*cos(allCenters(jj,ii));
+        ycenter = ycenter+(r(jj-1)-InOutInd(jj)*r(jj))*sin(allCenters(jj,ii));
         h(jj).XData = xcenter+r(jj)*cos(s);
         h(jj).YData = ycenter+r(jj)*sin(s);
     end
     lastxcenter(ii) = xcenter;
     lastycenter(ii) = ycenter;
     % trace the point pos;
-    p.XData = lastxcenter(1:ii)+InOutInd(numCirc)*pos*cos(anglecum(1:ii)-InOutInd(numCirc)*t(numCirc,1:ii));
-    p.YData = lastycenter(1:ii)+InOutInd(numCirc)*pos*sin(anglecum(1:ii)-InOutInd(numCirc)*t(numCirc,1:ii));
+    p.XData = lastxcenter(1:ii)+pos*cos(traceP(1:ii));
+    p.YData = lastycenter(1:ii)+pos*sin(traceP(1:ii));
     drawnow;
 end
 end
