@@ -74,7 +74,7 @@ p = plot(xcenter+InOutInd(numCirc)*pos,0,'.','MarkerFaceColor','red');
 % center of Ci and the radius of Ci through the point Pi;
 % alpha(i) is the angle formed by the radius of C(i-1) through the center 
 % of Ci and the radius of C(i-1) through the point P(i-1);
-numSampInt = 200;
+numSampInt = 5000;
 t = 0:2*pi/numSampInt:rot*2*pi;
 numSampt = length(t);
 t = repmat(t,numCirc,1);
