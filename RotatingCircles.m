@@ -1,4 +1,4 @@
-function RotatingCircles(r,InOutInd,pos,rot,spdfactor,spd)
+function RotatingCircles(r,InOutInd,DirInd,pos,rot,spdfactor,spd)
 % Draw the unit circle C0 centered at the origin, followed by a sequence of 
 % circles Ci, all touching the previous one, either internally, or 
 % externally on the right. If a circle touches the previous one internally,
@@ -16,6 +16,10 @@ function RotatingCircles(r,InOutInd,pos,rot,spdfactor,spd)
 % the corresponding circle rotates around the previous one internally. -1
 % indicates that the corresponding circle rotates around the previous one
 % externally. 
+% DirInd: a vector of length n, with entries 1 or -1. 1 indicates that the
+% corresponding circle rotates internally and clockwise or externally and
+% ccw; -1 indicates that the corresponding circle rotates internally and
+% ccw or externally and cw.
 % pos: the point to trace; indicated by the distance from the center of Cn; 
 % 0<pos<r(n);
 % rot: number of rotations C1 rolls around;
@@ -67,14 +71,14 @@ for ii = 2:numCirc
     h(ii) = plot(x,y,'r');
 end
 % plot the point to trace in the last circle;
-p = plot(xcenter+InOutInd(numCirc)*pos,0,'o','MarkerFaceColor','red');
+p = plot(xcenter+InOutInd(numCirc)*pos,0,'.','MarkerFaceColor','red');
 
 
 % t(i) is the parameter angle formed by the radius of C(i-1) through the
 % center of Ci and the radius of Ci through the point Pi;
 % alpha(i) is the angle formed by the radius of C(i-1) through the center 
 % of Ci and the radius of C(i-1) through the point P(i-1);
-numSampInt = 200;
+numSampInt = 500;
 t = 0:2*pi/numSampInt:rot*2*pi;
 numSampt = length(t);
 t = repmat(t,numCirc,1);
@@ -85,6 +89,8 @@ for ii = 2:numCirc
     alpha(ii,:) = r(ii)*t(ii,:)/r(ii-1);
 end
 t = diag(-InOutInd)*t; % +theta if external; -theta if internal;
+alpha = diag(DirInd)*alpha; % +alpha if internal and cw or external and ccw; 
+% -alpha if internal and ccw or external and cw.
 
 % record the trajectories of the last touching point during rotations;
 traceP = (-InOutInd(numCirc)+1)/2*pi+sum(alpha+t);
