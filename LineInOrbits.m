@@ -14,6 +14,7 @@ function LineInOrbits(r,spdfactor,spd,rot)
 % implemented in live script; 
 % plot C0 and C1;
 
+fig = figure;
 fimplicit(@(x,y) x.^2 + y.^2 - 1);
 set(gca,'Color','k')
 hold on;
@@ -35,6 +36,19 @@ for ii = 1:numSampt
     % draw line segment for each sample pair;
     line([cos(t0(ii)) r*cos(t1(ii))],[sin(t0(ii)) r*sin(t1(ii))],'Color','white');
     drawnow;
+    frame = getframe(fig);
+    im{ii} = frame2im(frame);
 end
 rectangle('Position',[-0.1 -0.1 0.2 0.2],'Curvature',[1 1],'FaceColor','y','EdgeColor',[1 1 0.8],'LineWidth',5);
+frame = getframe(fig);
+im{numSampt+1} = frame2im(frame);
+filename = 'testAnimated.gif'; % Specify the output file name
+for ii = 1:numSampt+1
+    [A,map] = rgb2ind(im{ii},256);
+    if ii == 1
+        imwrite(A,map,filename,'gif','LoopCount',Inf,'DelayTime',0.01);
+    else
+        imwrite(A,map,filename,'gif','WriteMode','append','DelayTime',0.01);
+    end
+end
 end
